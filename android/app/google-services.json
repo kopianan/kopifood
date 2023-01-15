@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "904559981404",
+    "project_id": "kopifood-4859d",
+    "storage_bucket": "kopifood-4859d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904559981404:android:797a63f05673bd50510799",
+        "android_client_info": {
+          "package_name": "com.example.kopifood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "904559981404-8ijjm7v3afnpgf76p2nar2a9lgjra9vl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSbsWydRpVuA14lV7FdIMNqMDYo8KvzCg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "904559981404-8ijjm7v3afnpgf76p2nar2a9lgjra9vl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
