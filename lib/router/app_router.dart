@@ -12,12 +12,13 @@ part 'app_router.gr.dart';
   routes: <AutoRoute>[
     AutoRoute(
       page: SplashPage,
-      path: '/',
+      // path: '/',
       initial: true,
     ),
     AutoRoute(
       page: HomePage,
-      path: '/home',
+      // path: '/home',
+      path: '/',
     ),
   ],
 )
