@@ -1,17 +1,26 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:kopifood/router/app_router.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
+    return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart_rounded))
+        ],
+      ),
+      body: InkWell(
+        onTap: (){
+          context.router.navigate(  FoodDetailRoute()); 
+        },
+        child: Container(
           padding: const EdgeInsets.all(10),
           height: 100,
           width: double.infinity,
-          // color: Colors.green,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,

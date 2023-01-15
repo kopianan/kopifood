@@ -29,6 +29,14 @@ class _$AppRouter extends RootStackRouter {
         child: const HomePage(),
       );
     },
+    FoodDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<FoodDetailRouteArgs>(
+          orElse: () => const FoodDetailRouteArgs());
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: FoodDetailPage(key: args.key),
+      );
+    },
   };
 
   @override
@@ -40,6 +48,10 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(
           HomeRoute.name,
           path: '/',
+        ),
+        RouteConfig(
+          FoodDetailRoute.name,
+          path: 'food-detail',
         ),
       ];
 }
@@ -66,4 +78,28 @@ class HomeRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'HomeRoute';
+}
+
+/// generated route for
+/// [FoodDetailPage]
+class FoodDetailRoute extends PageRouteInfo<FoodDetailRouteArgs> {
+  FoodDetailRoute({Key? key})
+      : super(
+          FoodDetailRoute.name,
+          path: 'food-detail',
+          args: FoodDetailRouteArgs(key: key),
+        );
+
+  static const String name = 'FoodDetailRoute';
+}
+
+class FoodDetailRouteArgs {
+  const FoodDetailRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'FoodDetailRouteArgs{key: $key}';
+  }
 }
