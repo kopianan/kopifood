@@ -6,7 +6,10 @@ import 'package:kopifood/application/food_cubit.dart';
 import 'package:kopifood/injection.dart';
 import 'package:kopifood/presentation/home/widget/food_list_item.dart';
 import 'package:kopifood/router/app_router.dart';
+import 'package:kopifood/theme/app_colors.dart';
 import 'package:kopifood/theme/app_text_style.dart';
+import 'package:kopifood/theme/primary_button.dart';
+import 'package:kopifood/utils/number_converter.dart';
 
 class FoodListPage extends StatefulWidget {
   const FoodListPage({super.key});
@@ -15,7 +18,7 @@ class FoodListPage extends StatefulWidget {
   State<FoodListPage> createState() => _FoodListPageState();
 }
 
-class _FoodListPageState extends State<FoodListPage> {
+class _FoodListPageState extends State<FoodListPage> with ConverterMixin {
   @override
   void initState() {
     super.initState();
@@ -23,6 +26,7 @@ class _FoodListPageState extends State<FoodListPage> {
 
   @override
   Widget build(BuildContext context) {
+    final foodCartCubit = context.read<FoodCartCubit>();
     return BlocProvider(
       create: (context) => getIt<FoodCubit>()..getFood(),
       child: BlocBuilder<FoodCartCubit, FoodCartState>(
@@ -39,42 +43,51 @@ class _FoodListPageState extends State<FoodListPage> {
             builder: (context, state) {
               return Scaffold(
                   appBar: AppBar(
-                    actions: [
-                      IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.shopping_cart_rounded))
-                    ],
+                    title: const Text("Selamat Datang"),
                   ),
-                  body: state.maybeMap(
-                    orElse: () {
-                      return SizedBox();
-                    },
-                    onGetAllFood: (value) {
-                      return ListView.builder(
-                        itemCount: cartState.foods.length,
-                        itemBuilder: (context, index) {
-                          final singleItem = cartState.foods[index];
-                          return FoodListItem(
-                              onTap: () async {
-                                context
-                                    .read<FoodCartCubit>()
-                                    .setSelectedFood(singleItem);
-                                final ifFinish = await context.router
-                                    .navigate(FoodDetailRoute());
-                                if (ifFinish == true) {
-                                  context
-                                      .read<FoodCartCubit>()
-                                      .setSelectedFood(null);
-                                }
-                              },
-                              quantityBuy: singleItem.totalBuy,
-                              imageUrl: singleItem.foodImages.first,
-                              name: singleItem.name,
-                              price: singleItem.price);
-                        },
-                      );
-                    },
-                  ));
+                  body: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: state.maybeMap(
+                      orElse: () {
+                        return SizedBox();
+                      },
+                      onGetAllFood: (value) {
+                        return ListView.builder(
+                          itemCount: cartState.foods.length,
+                          itemBuilder: (context, index) {
+                            final singleItem = cartState.foods[index];
+                            return FoodListItem(
+                                onTap: () async {
+                                  foodCartCubit.setSelectedFood(singleItem);
+                                  final ifFinish = await context.router
+                                      .navigate(FoodDetailRoute());
+                                  if (ifFinish == true) {
+                                    foodCartCubit.setSelectedFood(null);
+                                  }
+                                },
+                                quantityBuy: singleItem.totalBuy,
+                                imageUrl: singleItem.foodImages.first,
+                                name: singleItem.name,
+                                price: singleItem.price);
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                  persistentFooterButtons: context
+                          .read<FoodCartCubit>()
+                          .anyFood()
+                      ? [
+                          PrimaryButton(
+                            label:
+                                "Lanjutkan ( ${convertDoubleToPrice(foodCartCubit.calculateTotal())} )",
+                            onPress: () {
+                              context.read<FoodCartCubit>().submitPrePayOrder();
+                              context.router.navigate(FoodSummaryRoute());
+                            },
+                          )
+                        ]
+                      : null);
             },
           );
         },

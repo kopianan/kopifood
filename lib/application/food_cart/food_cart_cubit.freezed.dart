@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$FoodCartState {
   List<Food> get foods => throw _privateConstructorUsedError;
+  List<Food> get confirmedOrder => throw _privateConstructorUsedError;
   Food? get selectedFood => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +31,7 @@ abstract class $FoodCartStateCopyWith<$Res> {
           FoodCartState value, $Res Function(FoodCartState) then) =
       _$FoodCartStateCopyWithImpl<$Res, FoodCartState>;
   @useResult
-  $Res call({List<Food> foods, Food? selectedFood});
+  $Res call({List<Food> foods, List<Food> confirmedOrder, Food? selectedFood});
 
   $FoodCopyWith<$Res>? get selectedFood;
 }
@@ -49,12 +50,17 @@ class _$FoodCartStateCopyWithImpl<$Res, $Val extends FoodCartState>
   @override
   $Res call({
     Object? foods = null,
+    Object? confirmedOrder = null,
     Object? selectedFood = freezed,
   }) {
     return _then(_value.copyWith(
       foods: null == foods
           ? _value.foods
           : foods // ignore: cast_nullable_to_non_nullable
+              as List<Food>,
+      confirmedOrder: null == confirmedOrder
+          ? _value.confirmedOrder
+          : confirmedOrder // ignore: cast_nullable_to_non_nullable
               as List<Food>,
       selectedFood: freezed == selectedFood
           ? _value.selectedFood
@@ -84,7 +90,7 @@ abstract class _$$_FoodCartStateCopyWith<$Res>
       __$$_FoodCartStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Food> foods, Food? selectedFood});
+  $Res call({List<Food> foods, List<Food> confirmedOrder, Food? selectedFood});
 
   @override
   $FoodCopyWith<$Res>? get selectedFood;
@@ -102,12 +108,17 @@ class __$$_FoodCartStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? foods = null,
+    Object? confirmedOrder = null,
     Object? selectedFood = freezed,
   }) {
     return _then(_$_FoodCartState(
       foods: null == foods
           ? _value._foods
           : foods // ignore: cast_nullable_to_non_nullable
+              as List<Food>,
+      confirmedOrder: null == confirmedOrder
+          ? _value._confirmedOrder
+          : confirmedOrder // ignore: cast_nullable_to_non_nullable
               as List<Food>,
       selectedFood: freezed == selectedFood
           ? _value.selectedFood
@@ -120,8 +131,12 @@ class __$$_FoodCartStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_FoodCartState implements _FoodCartState {
-  const _$_FoodCartState({required final List<Food> foods, this.selectedFood})
-      : _foods = foods;
+  const _$_FoodCartState(
+      {required final List<Food> foods,
+      final List<Food> confirmedOrder = const [],
+      this.selectedFood})
+      : _foods = foods,
+        _confirmedOrder = confirmedOrder;
 
   final List<Food> _foods;
   @override
@@ -131,12 +146,21 @@ class _$_FoodCartState implements _FoodCartState {
     return EqualUnmodifiableListView(_foods);
   }
 
+  final List<Food> _confirmedOrder;
+  @override
+  @JsonKey()
+  List<Food> get confirmedOrder {
+    if (_confirmedOrder is EqualUnmodifiableListView) return _confirmedOrder;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_confirmedOrder);
+  }
+
   @override
   final Food? selectedFood;
 
   @override
   String toString() {
-    return 'FoodCartState(foods: $foods, selectedFood: $selectedFood)';
+    return 'FoodCartState(foods: $foods, confirmedOrder: $confirmedOrder, selectedFood: $selectedFood)';
   }
 
   @override
@@ -145,13 +169,18 @@ class _$_FoodCartState implements _FoodCartState {
         (other.runtimeType == runtimeType &&
             other is _$_FoodCartState &&
             const DeepCollectionEquality().equals(other._foods, _foods) &&
+            const DeepCollectionEquality()
+                .equals(other._confirmedOrder, _confirmedOrder) &&
             (identical(other.selectedFood, selectedFood) ||
                 other.selectedFood == selectedFood));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_foods), selectedFood);
+      runtimeType,
+      const DeepCollectionEquality().hash(_foods),
+      const DeepCollectionEquality().hash(_confirmedOrder),
+      selectedFood);
 
   @JsonKey(ignore: true)
   @override
@@ -163,10 +192,13 @@ class _$_FoodCartState implements _FoodCartState {
 abstract class _FoodCartState implements FoodCartState {
   const factory _FoodCartState(
       {required final List<Food> foods,
+      final List<Food> confirmedOrder,
       final Food? selectedFood}) = _$_FoodCartState;
 
   @override
   List<Food> get foods;
+  @override
+  List<Food> get confirmedOrder;
   @override
   Food? get selectedFood;
   @override

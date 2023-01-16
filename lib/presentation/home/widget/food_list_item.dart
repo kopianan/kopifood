@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kopifood/theme/app_colors.dart';
 import 'package:kopifood/theme/app_text_style.dart';
+import 'package:kopifood/utils/number_converter.dart';
 
-class FoodListItem extends StatelessWidget {
+class FoodListItem extends StatelessWidget with ConverterMixin {
   const FoodListItem({
     super.key,
     this.onTap,
@@ -23,14 +26,17 @@ class FoodListItem extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(10),
-        height: 100,
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+        margin: EdgeInsets.symmetric(vertical: 5.h),
+        height: 82,
         width: double.infinity,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
+              width: 100,
+              height: double.infinity,
               clipBehavior: Clip.hardEdge,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
@@ -40,34 +46,47 @@ class FoodListItem extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            const SizedBox(width: 10),
+            SizedBox(width: 10.w),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: RichText(
-                      overflow: TextOverflow.clip,
-                      maxLines: 2,
-                      softWrap: true,
-                      text: TextSpan(
-                          style: AppTextStyle.title16normal.copyWith(
-                            color:
-                                quantityBuy > 0 ? Colors.amber : Colors.black,
-                          ),
-                          children: [
-                            TextSpan(
-                                text:
-                                    quantityBuy == 0 ? '' : '${quantityBuy}x'),
-                            const TextSpan(text: ' '),
-                            TextSpan(text: "$name")
-                          ]),
-                    ),
+                  RichText(
+                    overflow: TextOverflow.clip,
+                    maxLines: 2,
+                    softWrap: true,
+                    text: TextSpan(
+                        style: quantityBuy > 0
+                            ? AppTextStyle.title14bold(AppColors.textPrimary)
+                            : AppTextStyle.title14normal(
+                                AppColors.defaultBlack),
+                        children: [
+                          TextSpan(
+                              text: quantityBuy == 0 ? '' : '${quantityBuy}x'),
+                          TextSpan(text: quantityBuy == 0 ? '' : ' '),
+                          TextSpan(text: name)
+                        ]),
                   ),
-                  Expanded(child: Text(price.toString()))
+                  5.verticalSpace,
+                  Text(
+                    "Tidak ada catatan makanan. Next time akan di update yah gaes. maksimal 2 line aja",
+                    maxLines: 2,
+                    softWrap: true,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppTextStyle.body11normal(AppColors.defaultGrey),
+                  )
                 ],
               ),
             ),
+            SizedBox(width: 10.w),
+            Text(
+              convertDoubleToPrice(price),
+              style: AppTextStyle.title14bold(
+                quantityBuy > 0
+                    ? AppColors.textPrimary
+                    : AppColors.defaultBlack,
+              ),
+            )
           ],
         ),
       ),

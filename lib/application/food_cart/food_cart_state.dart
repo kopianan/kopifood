@@ -4,11 +4,13 @@ part of 'food_cart_cubit.dart';
 class FoodCartState with _$FoodCartState {
   const factory FoodCartState({
     required List<Food> foods,
+    @Default([]) List<Food> confirmedOrder,
     Food? selectedFood,
   }) = _FoodCartState;
 
   factory FoodCartState.initial() => FoodCartState(
         foods: [],
+        confirmedOrder: [],
         selectedFood: null,
       );
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kopifood/router/app_router.dart';
+import 'package:kopifood/theme/app_colors.dart';
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
@@ -15,8 +16,10 @@ class MyApp extends StatelessWidget {
         routeInformationParser: _appRouter.defaultRouteParser(),
         title: 'Kopi Food',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+            appBarTheme: AppBarTheme(
+          backgroundColor: AppColors.secondaryColor,
+          foregroundColor: AppColors.foregroundColor,
+        )),
       ),
     );
   }

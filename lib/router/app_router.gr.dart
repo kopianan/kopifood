@@ -44,6 +44,12 @@ class _$AppRouter extends RootStackRouter {
         fullscreenDialog: true,
       );
     },
+    FoodSummaryRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const FoodSummaryPage(),
+      );
+    },
   };
 
   @override
@@ -77,6 +83,11 @@ class _$AppRouter extends RootStackRouter {
             RouteConfig(
               FoodDetailRoute.name,
               path: 'food-detail',
+              parent: FoodWrapperRoute.name,
+            ),
+            RouteConfig(
+              FoodSummaryRoute.name,
+              path: 'food-summary',
               parent: FoodWrapperRoute.name,
             ),
           ],
@@ -143,4 +154,16 @@ class FoodDetailRouteArgs {
   String toString() {
     return 'FoodDetailRouteArgs{key: $key}';
   }
+}
+
+/// generated route for
+/// [FoodSummaryPage]
+class FoodSummaryRoute extends PageRouteInfo<void> {
+  const FoodSummaryRoute()
+      : super(
+          FoodSummaryRoute.name,
+          path: 'food-summary',
+        );
+
+  static const String name = 'FoodSummaryRoute';
 }

@@ -42,4 +42,52 @@ class FoodCartCubit extends Cubit<FoodCartState> {
       }
     }
   }
+  //get all order data ;
+
+  void submitPrePayOrder() {
+    final allFood =
+        state.foods.where((element) => element.totalBuy > 0).toList();
+    emit(state.copyWith(confirmedOrder: allFood));
+    // allFood
+  }
+
+  //Function
+  bool anyFood() {
+    final boughtItems =
+        state.foods.where((element) => element.totalBuy > 0).length;
+    if (boughtItems == 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  double calculateSubTotal() {
+    double total = 0;
+    if (state.confirmedOrder.isNotEmpty) {
+      for (var element in state.confirmedOrder) {
+        total += element.price * element.totalBuy;
+      }
+    }
+    return total;
+  }
+
+  double calculatePPNTotal({double ppn = 0.11}) {
+    return calculateSubTotal() * ppn;
+  }
+
+  double calculateGrandTotal({double ppn = 0.11}) {
+    return calculateSubTotal() + calculatePPNTotal();
+  }
+
+  double calculateTotal() {
+    final boughtItems = state.foods.where((element) => element.totalBuy > 0);
+    double total = 0;
+    for (var element in boughtItems) {
+      final price = element.price;
+      final qty = element.totalBuy;
+      total += price * qty;
+    }
+    return total;
+  }
 }
