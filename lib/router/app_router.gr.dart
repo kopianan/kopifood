@@ -23,10 +23,16 @@ class _$AppRouter extends RootStackRouter {
         child: const SplashPage(),
       );
     },
-    HomeRoute.name: (routeData) {
+    FoodWrapperRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const HomePage(),
+        child: const FoodWrapperPage(),
+      );
+    },
+    FoodListRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const FoodListPage(),
       );
     },
     FoodDetailRoute.name: (routeData) {
@@ -35,6 +41,7 @@ class _$AppRouter extends RootStackRouter {
       return MaterialPageX<dynamic>(
         routeData: routeData,
         child: FoodDetailPage(key: args.key),
+        fullscreenDialog: true,
       );
     },
   };
@@ -42,16 +49,37 @@ class _$AppRouter extends RootStackRouter {
   @override
   List<RouteConfig> get routes => [
         RouteConfig(
+          '/#redirect',
+          path: '/',
+          redirectTo: '/food',
+          fullMatch: true,
+        ),
+        RouteConfig(
           SplashRoute.name,
           path: '/splash-page',
         ),
         RouteConfig(
-          HomeRoute.name,
-          path: '/',
-        ),
-        RouteConfig(
-          FoodDetailRoute.name,
-          path: 'food-detail',
+          FoodWrapperRoute.name,
+          path: '/food',
+          children: [
+            RouteConfig(
+              '#redirect',
+              path: '',
+              parent: FoodWrapperRoute.name,
+              redirectTo: 'food-list',
+              fullMatch: true,
+            ),
+            RouteConfig(
+              FoodListRoute.name,
+              path: 'food-list',
+              parent: FoodWrapperRoute.name,
+            ),
+            RouteConfig(
+              FoodDetailRoute.name,
+              path: 'food-detail',
+              parent: FoodWrapperRoute.name,
+            ),
+          ],
         ),
       ];
 }
@@ -69,15 +97,28 @@ class SplashRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [HomePage]
-class HomeRoute extends PageRouteInfo<void> {
-  const HomeRoute()
+/// [FoodWrapperPage]
+class FoodWrapperRoute extends PageRouteInfo<void> {
+  const FoodWrapperRoute({List<PageRouteInfo>? children})
       : super(
-          HomeRoute.name,
-          path: '/',
+          FoodWrapperRoute.name,
+          path: '/food',
+          initialChildren: children,
         );
 
-  static const String name = 'HomeRoute';
+  static const String name = 'FoodWrapperRoute';
+}
+
+/// generated route for
+/// [FoodListPage]
+class FoodListRoute extends PageRouteInfo<void> {
+  const FoodListRoute()
+      : super(
+          FoodListRoute.name,
+          path: 'food-list',
+        );
+
+  static const String name = 'FoodListRoute';
 }
 
 /// generated route for
