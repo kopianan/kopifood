@@ -20,6 +20,7 @@ mixin _$Food {
   List<String> get foodImages => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
+  String get notes => throw _privateConstructorUsedError;
   int? get quantity => throw _privateConstructorUsedError;
   int get totalBuy => throw _privateConstructorUsedError;
 
@@ -37,6 +38,7 @@ abstract class $FoodCopyWith<$Res> {
       List<String> foodImages,
       String name,
       double price,
+      String notes,
       int? quantity,
       int totalBuy});
 }
@@ -58,6 +60,7 @@ class _$FoodCopyWithImpl<$Res, $Val extends Food>
     Object? foodImages = null,
     Object? name = null,
     Object? price = null,
+    Object? notes = null,
     Object? quantity = freezed,
     Object? totalBuy = null,
   }) {
@@ -78,6 +81,10 @@ class _$FoodCopyWithImpl<$Res, $Val extends Food>
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as double,
+      notes: null == notes
+          ? _value.notes
+          : notes // ignore: cast_nullable_to_non_nullable
+              as String,
       quantity: freezed == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
@@ -101,6 +108,7 @@ abstract class _$$_FoodCopyWith<$Res> implements $FoodCopyWith<$Res> {
       List<String> foodImages,
       String name,
       double price,
+      String notes,
       int? quantity,
       int totalBuy});
 }
@@ -118,6 +126,7 @@ class __$$_FoodCopyWithImpl<$Res> extends _$FoodCopyWithImpl<$Res, _$_Food>
     Object? foodImages = null,
     Object? name = null,
     Object? price = null,
+    Object? notes = null,
     Object? quantity = freezed,
     Object? totalBuy = null,
   }) {
@@ -138,6 +147,10 @@ class __$$_FoodCopyWithImpl<$Res> extends _$FoodCopyWithImpl<$Res, _$_Food>
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as double,
+      notes: null == notes
+          ? _value.notes
+          : notes // ignore: cast_nullable_to_non_nullable
+              as String,
       quantity: freezed == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
@@ -158,6 +171,7 @@ class _$_Food extends _Food {
       required final List<String> foodImages,
       required this.name,
       required this.price,
+      required this.notes,
       this.quantity,
       required this.totalBuy})
       : _foodImages = foodImages,
@@ -178,13 +192,15 @@ class _$_Food extends _Food {
   @override
   final double price;
   @override
+  final String notes;
+  @override
   final int? quantity;
   @override
   final int totalBuy;
 
   @override
   String toString() {
-    return 'Food(id: $id, foodImages: $foodImages, name: $name, price: $price, quantity: $quantity, totalBuy: $totalBuy)';
+    return 'Food(id: $id, foodImages: $foodImages, name: $name, price: $price, notes: $notes, quantity: $quantity, totalBuy: $totalBuy)';
   }
 
   @override
@@ -197,6 +213,7 @@ class _$_Food extends _Food {
                 .equals(other._foodImages, _foodImages) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.price, price) || other.price == price) &&
+            (identical(other.notes, notes) || other.notes == notes) &&
             (identical(other.quantity, quantity) ||
                 other.quantity == quantity) &&
             (identical(other.totalBuy, totalBuy) ||
@@ -210,6 +227,7 @@ class _$_Food extends _Food {
       const DeepCollectionEquality().hash(_foodImages),
       name,
       price,
+      notes,
       quantity,
       totalBuy);
 
@@ -226,6 +244,7 @@ abstract class _Food extends Food {
       required final List<String> foodImages,
       required final String name,
       required final double price,
+      required final String notes,
       final int? quantity,
       required final int totalBuy}) = _$_Food;
   const _Food._() : super._();
@@ -238,6 +257,8 @@ abstract class _Food extends Food {
   String get name;
   @override
   double get price;
+  @override
+  String get notes;
   @override
   int? get quantity;
   @override

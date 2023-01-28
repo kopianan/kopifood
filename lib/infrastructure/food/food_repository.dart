@@ -18,8 +18,7 @@ class FoodRepository implements IFoodRepository {
         await _firestore.getStoresById(storeDocId).getFoodsCollection().get();
     final listFoods = foods.docs
         .map((item) => FoodDto.fromJson(item.data() as dynamic).toDomain())
-        .toList();
-    print(listFoods);
+        .toList(); 
     return right(listFoods);
   }
 }

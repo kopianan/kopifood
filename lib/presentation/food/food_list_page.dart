@@ -3,17 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kopifood/application/food_cart/food_cart_cubit.dart';
 import 'package:kopifood/application/food_cubit.dart';
+import 'package:kopifood/application/home/home_cubit.dart';
 import 'package:kopifood/injection.dart';
-import 'package:kopifood/presentation/home/widget/food_list_item.dart';
+import 'package:kopifood/presentation/food/widget/food_list_item.dart';
 import 'package:kopifood/router/app_router.dart';
-import 'package:kopifood/theme/app_colors.dart';
-import 'package:kopifood/theme/app_text_style.dart';
 import 'package:kopifood/theme/primary_button.dart';
 import 'package:kopifood/utils/number_converter.dart';
 
 class FoodListPage extends StatefulWidget {
-  const FoodListPage({super.key});
-
+  const FoodListPage({
+    super.key,
+    @PathParam('restaurantId') required this.restaurantId,
+  });
+  final String restaurantId;
   @override
   State<FoodListPage> createState() => _FoodListPageState();
 }
@@ -28,7 +30,7 @@ class _FoodListPageState extends State<FoodListPage> with ConverterMixin {
   Widget build(BuildContext context) {
     final foodCartCubit = context.read<FoodCartCubit>();
     return BlocProvider(
-      create: (context) => getIt<FoodCubit>()..getFood(),
+      create: (context) => getIt<FoodCubit>()..getFood(widget.restaurantId),
       child: BlocBuilder<FoodCartCubit, FoodCartState>(
         builder: (context, cartState) {
           return BlocConsumer<FoodCubit, FoodState>(
@@ -43,13 +45,19 @@ class _FoodListPageState extends State<FoodListPage> with ConverterMixin {
             builder: (context, state) {
               return Scaffold(
                   appBar: AppBar(
+                    leading: IconButton(
+                      onPressed: (){
+                        AutoRouter.of(context).pop(); 
+                      },
+                      icon: Icon(Icons.arrow_back),
+                    ),
                     title: const Text("Selamat Datang"),
                   ),
                   body: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: state.maybeMap(
                       orElse: () {
-                        return SizedBox();
+                        return const SizedBox();
                       },
                       onGetAllFood: (value) {
                         return ListView.builder(
@@ -65,6 +73,7 @@ class _FoodListPageState extends State<FoodListPage> with ConverterMixin {
                                     foodCartCubit.setSelectedFood(null);
                                   }
                                 },
+                                notes: singleItem.notes,
                                 quantityBuy: singleItem.totalBuy,
                                 imageUrl: singleItem.foodImages.first,
                                 name: singleItem.name,
@@ -83,7 +92,7 @@ class _FoodListPageState extends State<FoodListPage> with ConverterMixin {
                                 "Lanjutkan ( ${convertDoubleToPrice(foodCartCubit.calculateTotal())} )",
                             onPress: () {
                               context.read<FoodCartCubit>().submitPrePayOrder();
-                              context.router.navigate(FoodSummaryRoute());
+                              context.router.navigate(const FoodSummaryRoute());
                             },
                           )
                         ]

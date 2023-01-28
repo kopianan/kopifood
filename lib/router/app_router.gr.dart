@@ -23,6 +23,12 @@ class _$AppRouter extends RootStackRouter {
         child: const SplashPage(),
       );
     },
+    HomeRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const HomePage(),
+      );
+    },
     FoodWrapperRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
         routeData: routeData,
@@ -30,9 +36,16 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     FoodListRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<FoodListRouteArgs>(
+          orElse: () => FoodListRouteArgs(
+              restaurantId: pathParams.getString('restaurantId')));
       return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const FoodListPage(),
+        child: FoodListPage(
+          key: args.key,
+          restaurantId: args.restaurantId,
+        ),
       );
     },
     FoodDetailRoute.name: (routeData) {
@@ -57,12 +70,16 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(
           '/#redirect',
           path: '/',
-          redirectTo: '/food',
+          redirectTo: '/home',
           fullMatch: true,
         ),
         RouteConfig(
           SplashRoute.name,
           path: '/splash-page',
+        ),
+        RouteConfig(
+          HomeRoute.name,
+          path: '/home',
         ),
         RouteConfig(
           FoodWrapperRoute.name,
@@ -72,12 +89,12 @@ class _$AppRouter extends RootStackRouter {
               '#redirect',
               path: '',
               parent: FoodWrapperRoute.name,
-              redirectTo: 'food-list',
+              redirectTo: 'food-list:restaurantId',
               fullMatch: true,
             ),
             RouteConfig(
               FoodListRoute.name,
-              path: 'food-list',
+              path: 'food-list:restaurantId',
               parent: FoodWrapperRoute.name,
             ),
             RouteConfig(
@@ -108,6 +125,18 @@ class SplashRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [HomePage]
+class HomeRoute extends PageRouteInfo<void> {
+  const HomeRoute()
+      : super(
+          HomeRoute.name,
+          path: '/home',
+        );
+
+  static const String name = 'HomeRoute';
+}
+
+/// generated route for
 /// [FoodWrapperPage]
 class FoodWrapperRoute extends PageRouteInfo<void> {
   const FoodWrapperRoute({List<PageRouteInfo>? children})
@@ -122,14 +151,37 @@ class FoodWrapperRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [FoodListPage]
-class FoodListRoute extends PageRouteInfo<void> {
-  const FoodListRoute()
-      : super(
+class FoodListRoute extends PageRouteInfo<FoodListRouteArgs> {
+  FoodListRoute({
+    Key? key,
+    required String restaurantId,
+  }) : super(
           FoodListRoute.name,
-          path: 'food-list',
+          path: 'food-list:restaurantId',
+          args: FoodListRouteArgs(
+            key: key,
+            restaurantId: restaurantId,
+          ),
+          rawPathParams: {'restaurantId': restaurantId},
         );
 
   static const String name = 'FoodListRoute';
+}
+
+class FoodListRouteArgs {
+  const FoodListRouteArgs({
+    this.key,
+    required this.restaurantId,
+  });
+
+  final Key? key;
+
+  final String restaurantId;
+
+  @override
+  String toString() {
+    return 'FoodListRouteArgs{key: $key, restaurantId: $restaurantId}';
+  }
 }
 
 /// generated route for

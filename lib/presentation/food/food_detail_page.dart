@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kopifood/application/food_cart/food_cart_cubit.dart';
 import 'package:kopifood/theme/app_colors.dart';
@@ -60,7 +59,7 @@ class FoodDetailPage extends StatelessWidget with ConverterMixin {
                       style: AppTextStyle.title16bold(AppColors.textPrimary),
                     ),
                     subtitle: Text(
-                      "Description for feed should be here",
+                      state.selectedFood?.notes ?? "",
                       style: AppTextStyle.body11normal(),
                     )),
                 const Divider(thickness: 1),

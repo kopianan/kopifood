@@ -7,16 +7,17 @@ part 'food_dto.g.dart';
 @freezed
 abstract class FoodDto with _$FoodDto {
   const FoodDto._();
-  factory FoodDto({
-    required String foodId,
-    required List<String> foodImages,
-    required String name,
-    required double price,
-    int? quantity,
-  }) = _FoodDto;
+  factory FoodDto(
+      {required String foodId,
+      required List<String> foodImages,
+      required String name,
+      required double price,
+      int? quantity,
+      String? notes}) = _FoodDto;
 
   Food toDomain() {
     return Food(
+      notes: notes ?? "Tidak ada catatan",
       id: foodId,
       foodImages: foodImages,
       name: name,

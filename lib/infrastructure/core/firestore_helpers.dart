@@ -1,9 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:kopifood/injection.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; 
 
 extension FirestoreX on FirebaseFirestore {
   DocumentReference getStoresById(String storeDocId) =>
-      FirebaseFirestore.instance.collection('stores').doc(storeDocId);
+      collection('stores').doc(storeDocId);
+
+  CollectionReference get getRestaurantCollection => collection('stores');
 }
 
 extension DocumentReferenceX on DocumentReference {

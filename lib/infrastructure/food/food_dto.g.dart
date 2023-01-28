@@ -14,6 +14,7 @@ _$_FoodDto _$$_FoodDtoFromJson(Map<String, dynamic> json) => _$_FoodDto(
       name: json['name'] as String,
       price: (json['price'] as num).toDouble(),
       quantity: json['quantity'] as int?,
+      notes: json['notes'] as String?,
     );
 
 Map<String, dynamic> _$$_FoodDtoToJson(_$_FoodDto instance) =>
@@ -23,4 +24,5 @@ Map<String, dynamic> _$$_FoodDtoToJson(_$_FoodDto instance) =>
       'name': instance.name,
       'price': instance.price,
       'quantity': instance.quantity,
+      'notes': instance.notes,
     };

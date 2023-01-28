@@ -11,6 +11,7 @@ class Food with _$Food {
     required List<String> foodImages,
     required String name,
     required double price,
+    required String notes,
     int? quantity,
     required int totalBuy,
   }) = _Food;

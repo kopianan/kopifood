@@ -10,16 +10,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(400, 700),
+      designSize: const Size(400, 700),
       builder: (context, widget) => MaterialApp.router(
         routerDelegate: _appRouter.delegate(),
         routeInformationParser: _appRouter.defaultRouteParser(),
         title: 'Kopi Food',
         theme: ThemeData(
-            appBarTheme: AppBarTheme(
-          backgroundColor: AppColors.secondaryColor,
-          foregroundColor: AppColors.foregroundColor,
-        )),
+            iconTheme: const IconThemeData(color: AppColors.foregroundColor),
+            appBarTheme: const AppBarTheme(
+              backgroundColor: AppColors.secondaryColor,
+              foregroundColor: AppColors.foregroundColor,
+            )),
       ),
     );
   }

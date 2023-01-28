@@ -11,4 +11,4 @@ abstract class FirebaseModule {
 
     return fbFirestore;
   }
-}
+} 

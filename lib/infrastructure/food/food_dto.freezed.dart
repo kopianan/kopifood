@@ -25,6 +25,7 @@ mixin _$FoodDto {
   String get name => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
   int? get quantity => throw _privateConstructorUsedError;
+  String? get notes => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,7 +42,8 @@ abstract class $FoodDtoCopyWith<$Res> {
       List<String> foodImages,
       String name,
       double price,
-      int? quantity});
+      int? quantity,
+      String? notes});
 }
 
 /// @nodoc
@@ -62,6 +64,7 @@ class _$FoodDtoCopyWithImpl<$Res, $Val extends FoodDto>
     Object? name = null,
     Object? price = null,
     Object? quantity = freezed,
+    Object? notes = freezed,
   }) {
     return _then(_value.copyWith(
       foodId: null == foodId
@@ -84,6 +87,10 @@ class _$FoodDtoCopyWithImpl<$Res, $Val extends FoodDto>
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int?,
+      notes: freezed == notes
+          ? _value.notes
+          : notes // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -100,7 +107,8 @@ abstract class _$$_FoodDtoCopyWith<$Res> implements $FoodDtoCopyWith<$Res> {
       List<String> foodImages,
       String name,
       double price,
-      int? quantity});
+      int? quantity,
+      String? notes});
 }
 
 /// @nodoc
@@ -118,6 +126,7 @@ class __$$_FoodDtoCopyWithImpl<$Res>
     Object? name = null,
     Object? price = null,
     Object? quantity = freezed,
+    Object? notes = freezed,
   }) {
     return _then(_$_FoodDto(
       foodId: null == foodId
@@ -140,6 +149,10 @@ class __$$_FoodDtoCopyWithImpl<$Res>
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int?,
+      notes: freezed == notes
+          ? _value.notes
+          : notes // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -152,7 +165,8 @@ class _$_FoodDto extends _FoodDto {
       required final List<String> foodImages,
       required this.name,
       required this.price,
-      this.quantity})
+      this.quantity,
+      this.notes})
       : _foodImages = foodImages,
         super._();
 
@@ -175,10 +189,12 @@ class _$_FoodDto extends _FoodDto {
   final double price;
   @override
   final int? quantity;
+  @override
+  final String? notes;
 
   @override
   String toString() {
-    return 'FoodDto(foodId: $foodId, foodImages: $foodImages, name: $name, price: $price, quantity: $quantity)';
+    return 'FoodDto(foodId: $foodId, foodImages: $foodImages, name: $name, price: $price, quantity: $quantity, notes: $notes)';
   }
 
   @override
@@ -192,13 +208,20 @@ class _$_FoodDto extends _FoodDto {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.quantity, quantity) ||
-                other.quantity == quantity));
+                other.quantity == quantity) &&
+            (identical(other.notes, notes) || other.notes == notes));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, foodId,
-      const DeepCollectionEquality().hash(_foodImages), name, price, quantity);
+  int get hashCode => Object.hash(
+      runtimeType,
+      foodId,
+      const DeepCollectionEquality().hash(_foodImages),
+      name,
+      price,
+      quantity,
+      notes);
 
   @JsonKey(ignore: true)
   @override
@@ -220,7 +243,8 @@ abstract class _FoodDto extends FoodDto {
       required final List<String> foodImages,
       required final String name,
       required final double price,
-      final int? quantity}) = _$_FoodDto;
+      final int? quantity,
+      final String? notes}) = _$_FoodDto;
   _FoodDto._() : super._();
 
   factory _FoodDto.fromJson(Map<String, dynamic> json) = _$_FoodDto.fromJson;
@@ -235,6 +259,8 @@ abstract class _FoodDto extends FoodDto {
   double get price;
   @override
   int? get quantity;
+  @override
+  String? get notes;
   @override
   @JsonKey(ignore: true)
   _$$_FoodDtoCopyWith<_$_FoodDto> get copyWith =>

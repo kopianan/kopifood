@@ -9,12 +9,11 @@ part 'food_cubit.freezed.dart';
 
 @injectable
 class FoodCubit extends Cubit<FoodState> {
-  FoodCubit(this.iFoodRepository) : super(FoodState.initial());
+  FoodCubit(this.iFoodRepository) : super(const FoodState.initial());
   final IFoodRepository iFoodRepository;
 
-  void getFood() async {
-    print("GETDATA");
-    final result = await iFoodRepository.getAllFood("Bo3drYVBYnljdvI7EBQk");
+  void getFood(String? restaurantId) async {
+    final result = await iFoodRepository.getAllFood(restaurantId!);
     result.fold(
       (l) => emit(const FoodState.loading()),
       (r) => emit(FoodState.onGetAllFood(r)),

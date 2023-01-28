@@ -4,7 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kopifood/application/food_cart/food_cart_cubit.dart';
-import 'package:kopifood/presentation/detail/widget/food_summary_list_item.dart';
+import 'package:kopifood/presentation/summary/widget/food_summary_list_item.dart';
 import 'package:kopifood/theme/app_colors.dart';
 import 'package:kopifood/theme/app_text_style.dart';
 import 'package:kopifood/theme/primary_button.dart';

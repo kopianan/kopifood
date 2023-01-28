@@ -8,7 +8,7 @@ class FoodCartState with _$FoodCartState {
     Food? selectedFood,
   }) = _FoodCartState;
 
-  factory FoodCartState.initial() => FoodCartState(
+  factory FoodCartState.initial() => const FoodCartState(
         foods: [],
         confirmedOrder: [],
         selectedFood: null,

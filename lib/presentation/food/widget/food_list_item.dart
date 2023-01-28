@@ -14,11 +14,13 @@ class FoodListItem extends StatelessWidget with ConverterMixin {
     required this.imageUrl,
     required this.name,
     required this.price,
+    required this.notes
   });
   final Function()? onTap;
   final String name;
   final int quantityBuy;
   final String imageUrl;
+  final String notes; 
   final double price;
 
   @override
@@ -57,7 +59,7 @@ class FoodListItem extends StatelessWidget with ConverterMixin {
                     softWrap: true,
                     text: TextSpan(
                         style: quantityBuy > 0
-                            ? AppTextStyle.title14bold(AppColors.textPrimary)
+                            ? AppTextStyle.title14bold(AppColors.primaryColor)
                             : AppTextStyle.title14normal(
                                 AppColors.defaultBlack),
                         children: [
@@ -69,7 +71,7 @@ class FoodListItem extends StatelessWidget with ConverterMixin {
                   ),
                   5.verticalSpace,
                   Text(
-                    "Tidak ada catatan makanan. Next time akan di update yah gaes. maksimal 2 line aja",
+                    notes,
                     maxLines: 2,
                     softWrap: true,
                     overflow: TextOverflow.ellipsis,
@@ -83,7 +85,7 @@ class FoodListItem extends StatelessWidget with ConverterMixin {
               convertDoubleToPrice(price),
               style: AppTextStyle.title14bold(
                 quantityBuy > 0
-                    ? AppColors.textPrimary
+                    ? AppColors.primaryColor
                     : AppColors.defaultBlack,
               ),
             )
